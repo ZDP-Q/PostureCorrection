@@ -1,0 +1,50 @@
+[project]
+name = "pose"
+version = "2.0.0"
+description = "姿态对比系统 - 使用OpenCV和MediaPipe实现实时姿态检测与参考姿态对比"
+readme = "README.md"
+requires-python = ">=3.9,<3.13"
+dependencies = [
+    "opencv-python>=4.8.0",
+    "mediapipe>=0.10.0",
+    "numpy>=1.24.0,<2.0.0",
+    "PyQt5==5.15.9",
+    "PyQt5-Qt5==5.15.2",
+    "PyQt5-sip>=12.11.0",
+    "Pillow>=10.0.0",
+]
+
+[tool.uv]
+package = true
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+    "mypy>=1.0.0",
+]
+
+[project.scripts]
+pose = "src.main:main"
+pose-gui = "src.main:run_gui"
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
