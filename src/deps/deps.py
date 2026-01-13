@@ -130,11 +130,11 @@ class Deps:
             name = self._current_selections.get('detector')
         
         if name is None:
-            # 使用默认
-            cls = self._registry.get_default('detector')
-            if cls is None:
+            # 使用默认 - 获取默认组件信息
+            default_info = self._registry.get_default_info('detector')
+            if default_info is None:
                 raise ValueError("没有可用的检测器")
-            name = cls.__name__
+            name = default_info.name
         
         key = self._get_instance_key('detector', name)
         if key not in self._instances:
@@ -158,10 +158,10 @@ class Deps:
             name = self._current_selections.get('analyzer')
         
         if name is None:
-            cls = self._registry.get_default('analyzer')
-            if cls is None:
+            default_info = self._registry.get_default_info('analyzer')
+            if default_info is None:
                 raise ValueError("没有可用的分析器")
-            name = cls.__name__
+            name = default_info.name
         
         key = self._get_instance_key('analyzer', name)
         if key not in self._instances:
@@ -185,10 +185,10 @@ class Deps:
             name = self._current_selections.get('config')
         
         if name is None:
-            cls = self._registry.get_default('config')
-            if cls is None:
+            default_info = self._registry.get_default_info('config')
+            if default_info is None:
                 raise ValueError("没有可用的配置")
-            name = cls.__name__
+            name = default_info.name
         
         key = self._get_instance_key('config', name)
         if key not in self._instances:

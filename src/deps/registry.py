@@ -162,6 +162,28 @@ class Registry:
         
         return None
     
+    def get_default_info(self, category: str) -> Optional[ComponentInfo]:
+        """
+        获取默认组件信息
+        
+        Args:
+            category: 组件类别
+            
+        Returns:
+            默认组件信息或None
+        """
+        components = self._components.get(category, {})
+        for info in components.values():
+            if info.is_default:
+                return info
+        
+        # 如果没有设置默认，返回第一个
+        if components:
+            first_name = list(components.keys())[0]
+            return components[first_name]
+        
+        return None
+    
     def list_components(self, category: str) -> Dict[str, ComponentInfo]:
         """
         列出指定类别的所有组件
